@@ -2,18 +2,16 @@ pipeline {
     agent any
 
     tools {
-        maven 'Maven-3.9'       // Name configured in Jenkins > Global Tool Config
-        jdk 'JDK-24'            // Name configured in Jenkins > Global Tool Config
+        maven 'Maven_3.9.9'     // Name configured in Jenkins
+        jdk 'JDK-21'            // Name configured in Jenkins
     }
 
     environment {
-        // Set environment variables as needed
-        JAVA_HOME = "${tool 'JDK-24'}"
+        JAVA_HOME = "${tool 'JDK-21'}"
         PATH = "${env.JAVA_HOME}/bin:${env.PATH}"
     }
 
     stages {
-
         stage('Checkout') {
             steps {
                 git url: 'https://github.com/kirank1994/MyDEMOAppAutomation.git', branch: 'master'
