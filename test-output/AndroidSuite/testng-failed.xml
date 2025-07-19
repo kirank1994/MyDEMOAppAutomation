@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite thread-count="1" parallel="methods" name="Failed suite [AndroidSuite]" guice-stage="DEVELOPMENT" allow-return-values="true" verbose="2">
+  <listeners>
+    <listener class-name="org.mydemo.retryAnalyzer.RetryListener"/>
+    <listener class-name="org.mydemo.reporting.Listeners"/>
+  </listeners>
+  <test thread-count="1" parallel="methods" name="AndroidRegression(failed)" verbose="2">
+    <parameter name="platform" value="ANDROID"/>
+    <groups>
+      <run>
+        <include name="regression"/>
+      </run>
+    </groups>
+    <classes>
+      <class name="org.mydemo.android.testCases.TestCase1">
+        <methods>
+          <include name="tearDown"/>
+          <include name="getDriver"/>
+          <include name="preSetup"/>
+          <include name="sampleTest1"/>
+        </methods>
+      </class> <!-- org.mydemo.android.testCases.TestCase1 -->
+    </classes>
+  </test> <!-- AndroidRegression(failed) -->
+</suite> <!-- Failed suite [AndroidSuite] -->

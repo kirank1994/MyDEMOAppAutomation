@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite thread-count="1" parallel="methods" name="Failed suite [IOSSuite]" guice-stage="DEVELOPMENT" allow-return-values="true" verbose="2">
+  <listeners>
+    <listener class-name="org.mydemo.retryAnalyzer.RetryListener"/>
+    <listener class-name="org.mydemo.reporting.Listeners"/>
+  </listeners>
+  <test thread-count="1" parallel="methods" name="IOSRegression(failed)" verbose="2">
+    <parameter name="platform" value="IOS"/>
+    <groups>
+      <run>
+        <include name="regression"/>
+      </run>
+    </groups>
+    <classes>
+      <class name="org.mydemo.ios.testCases.TestCase2">
+        <methods>
+          <include name="tearDown"/>
+          <include name="getDriver"/>
+          <include name="preSetup"/>
+          <include name="sampleTest1"/>
+        </methods>
+      </class> <!-- org.mydemo.ios.testCases.TestCase2 -->
+      <class name="org.mydemo.ios.testCases.TestCase1">
+        <methods>
+          <include name="sampleTest1"/>
+          <include name="tearDown"/>
+          <include name="getDriver"/>
+          <include name="preSetup"/>
+        </methods>
+      </class> <!-- org.mydemo.ios.testCases.TestCase1 -->
+    </classes>
+  </test> <!-- IOSRegression(failed) -->
+</suite> <!-- Failed suite [IOSSuite] -->
