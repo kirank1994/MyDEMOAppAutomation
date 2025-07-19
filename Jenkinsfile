@@ -30,15 +30,13 @@ pipeline {
             }
         }
 
-        stage('Archive Reports') {
-            steps {
-                // Archive all report files including HTML, XML, screenshots, etc.
-                archiveArtifacts artifacts: '**/test-output/**/*.*', allowEmptyArchive: true
-
-                // Publish JUnit-compatible testng-results.xml
-                junit '**/test-output/testng-results.xml'
-            }
-        }
+       stage('Archive Reports') {
+    steps {
+        archiveArtifacts artifacts: '**/test-output/**/*.*', allowEmptyArchive: true
+        archiveArtifacts artifacts: '**/reports/*.html', allowEmptyArchive: true
+        junit '**/test-output/testng-results.xml'
+    }
+}
     }
 
     post {
