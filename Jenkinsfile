@@ -2,8 +2,14 @@ pipeline {
     agent any
 
     tools {
-        maven 'Maven_3.9.9'     // Name configured in Jenkins
-        jdk 'JDK-21'            // Name configured in Jenkins
+        maven 'Maven_3.9.9'
+        jdk 'JDK-21'
+    }
+
+    parameters {
+        string(name: 'PLATFORM', defaultValue: 'ANDROID', description: 'Target platform (ANDROID or IOS)')
+        string(name: 'TAG', defaultValue: 'regression', description: 'Test group to run (e.g., regression, E2E)')
+        string(name: 'SUITE', defaultValue: 'testNGSuites/testng_ANDROID_Jenkins.xml', description: 'TestNG suite file')
     }
 
     environment {
@@ -18,9 +24,14 @@ pipeline {
             }
         }
 
-        stage('Build & Run Tests') {
+        stage('Run Tests') {
             steps {
-                sh 'mvn clean test'
+                sh """
+                    mvn clean test \
+                    -Dplatform=${params.PLATFORM} \
+                    -Dtag=${params.TAG} \
+                    -DsuiteXmlFile=${params.SUITE}
+                """
             }
         }
 
@@ -34,7 +45,7 @@ pipeline {
 
     post {
         always {
-            echo "Build finished!"
+            echo "Build completed"
         }
         failure {
             echo "Build failed!"

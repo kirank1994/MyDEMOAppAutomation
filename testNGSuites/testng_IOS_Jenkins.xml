@@ -10,12 +10,12 @@
 	<!-- ✅ Test block -->
 	<test name="IOSRegression">
 		<!-- 🔧 Platform-specific parameter (can be read in @BeforeMethod) -->
-		<parameter name="platform" value="IOS" />
+		<parameter name="platform" value="${platform}" />
 		<!-- ✅ Group filtering -->
 		<groups>
 			<run>
 				<!-- Use multiple include groups if needed -->
-				<include name="regression" />
+				<include name="${tag}" />
 				<!-- <include name="sanity"/> -->
 			</run>
 		</groups>

@@ -1,28 +1,28 @@
 <!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
-<suite name="AndroidSuite" verbose="2" parallel="methods"
-	thread-count="2" allow-return-values="true">
-	<!-- 📌 Global Listeners (Reporting, Retry, etc.) -->
-	<listeners>
-		<listener class-name="org.mydemo.retryAnalyzer.RetryListener" />
-		<listener class-name="org.mydemo.reporting.Listeners" />
-	</listeners>
+<suite name="AndroidSuite" verbose="2" parallel="methods" thread-count="2" allow-return-values="true">
 
-	<!-- ✅ Test block -->
-	<test name="AndroidRegression">
-		<!-- 🔧 Platform-specific parameter (can be read in @BeforeMethod) -->
-		<parameter name="platform" value="ANDROID" />
-		<!-- ✅ Group filtering -->
-		<groups>
-			<run>
-				<!-- Use multiple include groups if needed -->
-				<include name="regression" />
-				<!-- <include name="sanity"/> -->
-			</run>
-		</groups>
-		<!-- ✅ Target packages (all classes in this package will be scanned) -->
-		<packages>
-			<package name="org.mydemo.android.testCases" />
-		</packages>
-	</test>
+    <!-- 📌 Global Listeners (Reporting, Retry, etc.) -->
+    <listeners>
+        <listener class-name="org.mydemo.retryAnalyzer.RetryListener" />
+        <listener class-name="org.mydemo.reporting.Listeners" />
+    </listeners>
+
+    <!-- ✅ Test block -->
+    <test name="AndroidDynamic">
+        <!-- 🔧 Dynamically passed from Jenkins via -Dplatform=ANDROID -->
+        <parameter name="platform" value="${platform}" />
+
+        <!-- ✅ Group filtering based on Jenkins -Dtag=regression -->
+        <groups>
+            <run>
+                <include name="${tag}" />
+            </run>
+        </groups>
+
+        <!-- ✅ Automatically runs all classes under this package -->
+        <packages>
+            <package name="org.mydemo.android.testCases" />
+        </packages>
+    </test>
 
 </suite>
