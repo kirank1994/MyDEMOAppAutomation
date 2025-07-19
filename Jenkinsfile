@@ -1,37 +1,45 @@
 pipeline {
     agent any
 
-    parameters {
-        string(name: 'platform', defaultValue: 'IOS', description: 'Platform to run tests on (IOS or ANDROID)')
-        string(name: 'group', defaultValue: 'regression', description: 'Test group to run (e.g., regression, E2E)')
+    tools {
+        maven 'Maven-3.9'       // Name configured in Jenkins > Global Tool Config
+        jdk 'JDK-24'            // Name configured in Jenkins > Global Tool Config
+    }
+
+    environment {
+        // Set environment variables as needed
+        JAVA_HOME = "${tool 'JDK-24'}"
+        PATH = "${env.JAVA_HOME}/bin:${env.PATH}"
     }
 
     stages {
-        stage('Run Tests') {
-            steps {
-                script {
-                    def suiteFile = ""
-                    if (params.platform == "IOS") {
-                        suiteFile = "testNGSuites/testng_IOS.xml"
-                    } else if (params.platform == "ANDROID") {
-                        suiteFile = "testNGSuites/testng_ANDROID.xml"
-                    } else {
-                        error "Invalid platform: ${params.platform}"
-                    }
 
-                    sh """
-                        mvn clean test \
-                        -DsuiteXmlFile=${suiteFile} \
-                        -Dgroups=${params.group}
-                    """
-                }
+        stage('Checkout') {
+            steps {
+                git url: 'https://github.com/kirank1994/MyDEMOAppAutomation.git', branch: 'master'
+            }
+        }
+
+        stage('Build & Run Tests') {
+            steps {
+                sh 'mvn clean test'
+            }
+        }
+
+        stage('Archive Reports') {
+            steps {
+                archiveArtifacts artifacts: 'reports/**/*.html', allowEmptyArchive: true
+                junit 'test-output/testng-results.xml'
             }
         }
     }
 
     post {
         always {
-            archiveArtifacts artifacts: '**/index.html', allowEmptyArchive: true
+            echo "Build finished!"
+        }
+        failure {
+            echo "Build failed!"
         }
     }
 }
