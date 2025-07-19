@@ -10,10 +10,10 @@ pipeline {
         choice(
             name: 'SUITE',
             choices: [
-                'testng_ANDROID_E2E.xml',
-                'testng_IOS_E2E.xml',
-                'testng_ANDROID_Regression.xml',
-                'testng_IOS_Regression.xml'
+                'testNGSuites/testng_ANDROID_E2E.xml',
+                'testNGSuites/testng_IOS_E2E.xml',
+                'testNGSuites/testng_ANDROID_Regression.xml',
+                'testNGSuites/testng_IOS_Regression.xml'
             ],
             description: 'Select the TestNG suite XML file to run'
         )
@@ -42,6 +42,19 @@ pipeline {
         stage('Archive Reports') {
             steps {
                 archiveArtifacts artifacts: '**/reports/*.html', allowEmptyArchive: true
+            }
+        }
+
+        stage('Publish HTML Report') {
+            steps {
+                publishHTML([
+                    allowMissing: true,
+                    alwaysLinkToLastBuild: true,
+                    keepAll: true,
+                    reportDir: 'reports',
+                    reportFiles: 'index.html',
+                    reportName: 'Extent HTML Report'
+                ])
             }
         }
     }
