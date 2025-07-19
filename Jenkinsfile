@@ -41,14 +41,15 @@ pipeline {
 
         stage('Archive Reports') {
             steps {
-                archiveArtifacts artifacts: '**/reports/*.html', allowEmptyArchive: true
+                archiveArtifacts artifacts: 'reports/*.html', allowEmptyArchive: true
             }
         }
 
         stage('Publish HTML Report') {
             steps {
+                sh "sleep 2"
                 publishHTML([
-                    reportDir: 'reports',             // 🔁 Update this if index.html is in another folder
+                    reportDir: 'reports',
                     reportFiles: 'index.html',
                     reportName: 'Extent HTML Report',
                     keepAll: true,
@@ -64,7 +65,7 @@ pipeline {
             echo "✅ Build completed"
         }
         failure {
-            echo "❌ Build failed!"
+            echo "❌ Build failed! "
         }
     }
 }
