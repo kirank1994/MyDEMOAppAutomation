@@ -91,7 +91,7 @@ public class BaseTest {
 
 	public static void killPortIfInUse(int port, int systemPort) {
 		try {
-			Process process = Runtime.getRuntime().exec("lsof -t -i:" + port);
+			Process process = Runtime.getRuntime().exec("/usr/sbin/lsof -t -i:" + port);
 			BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()));
 			String pid;
 			while ((pid = reader.readLine()) != null) {
