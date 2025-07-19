@@ -46,8 +46,8 @@
 		<dependency>
 			<groupId>org.testng</groupId>
 			<artifactId>testng</artifactId>
-			<version>7.6.0</version>
-			<scope>test</scope>
+			<version>7.8.0</version>
+			<scope>compile</scope>
 		</dependency>
 
 		<!-- ✅ Logging -->
@@ -120,12 +120,12 @@
 				<version>2.22.2</version>
 				<configuration>
 					<suiteXmlFiles>
-						<suiteXmlFile>${suiteXmlFile}</suiteXmlFile>
+						<suiteXmlFile>testNGSuites/${suiteXmlFile}</suiteXmlFile>
 					</suiteXmlFiles>
-					<systemPropertyVariables>
+	<!--			<systemPropertyVariables>
 						<platform>${platform}</platform>
 						<tag>${tag}</tag>
-					</systemPropertyVariables>
+					</systemPropertyVariables> -->	
 				</configuration>
 			</plugin>
 

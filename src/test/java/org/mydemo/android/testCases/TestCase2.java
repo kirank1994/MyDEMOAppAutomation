@@ -6,7 +6,7 @@ import org.testng.annotations.Test;
 
 public class TestCase2 extends AndroidBaseTest {
 
-	@Test(groups = {"regression", "smoke"})
+	@Test(groups = {"regression1", "smoke"})
     public void sampleTest1() throws InterruptedException {
     	driver.findElement(By.xpath("//androidx.recyclerview.widget.RecyclerView[@content-desc=\"Displays all products of catalog\"]/android.view.ViewGroup[1]")).click();
     	Thread.sleep(3000);

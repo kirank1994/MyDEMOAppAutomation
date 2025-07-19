@@ -33,7 +33,7 @@ public class BaseTest {
 //	protected MyCart myCart;
 	@Parameters({ "platform" })
 	@BeforeClass(alwaysRun = true)
-	public void getDriver(@Optional("IOS") String platform) throws MalformedURLException {
+	public void getDriver(@Optional("ANDROID") String platform) throws MalformedURLException {
 		
 		ConfigReader prop = new ConfigReader(platform);
 		String ipAddress = System.getProperty("ipAddress") != null ? System.getProperty("ipAddress")

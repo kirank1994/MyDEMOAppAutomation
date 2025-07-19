@@ -7,8 +7,6 @@ pipeline {
     }
 
     parameters {
-        string(name: 'PLATFORM', defaultValue: 'ANDROID', description: 'Target platform (ANDROID or IOS)')
-        string(name: 'TAG', defaultValue: 'regression', description: 'Test group to run (e.g., regression, E2E)')
         string(name: 'SUITE', defaultValue: 'testNGSuites/testng_ANDROID_Jenkins.xml', description: 'TestNG suite file')
     }
 
@@ -28,8 +26,6 @@ pipeline {
             steps {
                 sh """
                     mvn clean test \
-                    -Dplatform=${params.PLATFORM} \
-                    -Dtag=${params.TAG} \
                     -DsuiteXmlFile=${params.SUITE}
                 """
             }
