@@ -1,0 +1,28 @@
+# macOS
+.DS_Store
+
+# IntelliJ / Eclipse
+.idea/
+*.iml
+.settings/
+.classpath
+.project
+
+# Maven
+target/
+pom.xml.tag
+pom.xml.releaseBackup
+pom.xml.versionsBackup
+pom.xml.next
+release.properties
+
+# Test Reports
+test-output/
+reports/
+
+# Logs
+*.log
+
+# Others
+*.bak
+*.swp
