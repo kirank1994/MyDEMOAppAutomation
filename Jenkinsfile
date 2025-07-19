@@ -10,10 +10,10 @@ pipeline {
         choice(
             name: 'SUITE',
             choices: [
-                'testNGSuites/testng_ANDROID_E2E.xml',
-                'testNGSuites/testng_IOS_E2E.xml',
-                'testNGSuites/testng_ANDROID_Regression.xml',
-                'testNGSuites/testng_IOS_Regression.xml'
+                'testng_ANDROID_E2E.xml',
+                'testng_IOS_E2E.xml',
+                'testng_ANDROID_Regression.xml',
+                'testng_IOS_Regression.xml'
             ],
             description: 'Select the TestNG suite XML file to run'
         )
