@@ -32,9 +32,7 @@ pipeline {
 
        stage('Archive Reports') {
     steps {
-        archiveArtifacts artifacts: '**/test-output/**/*.*', allowEmptyArchive: true
         archiveArtifacts artifacts: '**/reports/*.html', allowEmptyArchive: true
-        junit '**/test-output/testng-results.xml'
     }
 }
     }
