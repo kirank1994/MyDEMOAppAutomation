@@ -48,12 +48,12 @@ pipeline {
         stage('Publish HTML Report') {
             steps {
                 publishHTML([
-                    allowMissing: true,
-                    alwaysLinkToLastBuild: true,
-                    keepAll: true,
-                    reportDir: 'reports',
+                    reportDir: 'reports',             // 🔁 Update this if index.html is in another folder
                     reportFiles: 'index.html',
-                    reportName: 'Extent HTML Report'
+                    reportName: 'Extent HTML Report',
+                    keepAll: true,
+                    alwaysLinkToLastBuild: true,
+                    allowMissing: true
                 ])
             }
         }
