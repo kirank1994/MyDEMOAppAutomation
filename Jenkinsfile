@@ -7,7 +7,16 @@ pipeline {
     }
 
     parameters {
-        string(name: 'SUITE', defaultValue: 'testNGSuites/testng_ANDROID_Jenkins.xml', description: 'TestNG suite file')
+        choice(
+            name: 'SUITE',
+            choices: [
+                'testng_ANDROID_E2E.xml',
+                'testng_IOS_E2E.xml',
+                'testng_ANDROID_Regression.xml',
+                'testng_IOS_Regression.xml'
+            ],
+            description: 'Select the TestNG suite XML file to run'
+        )
     }
 
     environment {
@@ -30,11 +39,11 @@ pipeline {
             }
         }
 
-       stage('Archive Reports') {
-    steps {
-        archiveArtifacts artifacts: '**/reports/*.html', allowEmptyArchive: true
-    }
-}
+        stage('Archive Reports') {
+            steps {
+                archiveArtifacts artifacts: '**/reports/*.html', allowEmptyArchive: true
+            }
+        }
     }
 
     post {
