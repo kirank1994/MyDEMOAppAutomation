@@ -25,26 +25,28 @@ pipeline {
         stage('Run Tests') {
             steps {
                 sh """
-                    mvn clean test \
-                    -DsuiteXmlFile=${params.SUITE}
+                    mvn clean test -DsuiteXmlFile=${params.SUITE}
                 """
             }
         }
 
         stage('Archive Reports') {
             steps {
-                archiveArtifacts artifacts: 'reports/**/*.html', allowEmptyArchive: true
-                junit 'test-output/testng-results.xml'
+                // Archive all report files including HTML, XML, screenshots, etc.
+                archiveArtifacts artifacts: '**/test-output/**/*.*', allowEmptyArchive: true
+
+                // Publish JUnit-compatible testng-results.xml
+                junit '**/test-output/testng-results.xml'
             }
         }
     }
 
     post {
         always {
-            echo "Build completed"
+            echo "✅ Build completed"
         }
         failure {
-            echo "Build failed!"
+            echo "❌ Build failed!"
         }
     }
 }
